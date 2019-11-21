@@ -17,13 +17,14 @@ public class ClientController {
 
     @GetMapping("/clients")
     public List<Client> getAllClients() {
-
         return (List<Client>) repository.findAll();
     }
 
     @PostMapping(value = "/clients")
-    void addClient(@RequestBody Client client) {
-         Client _client = repository.save(client);
+    public Client addClient(@RequestBody Client client) {
+
+        Client _client = repository.save(client);
+        return _client;
     }
 
     @GetMapping("/clients/{id}")
@@ -32,11 +33,13 @@ public class ClientController {
         return clientData;
     }
 
+    /*
     @PostMapping(value = "/clients/create")
     public Client postCustomer(@RequestBody Client client) {
         Client _client = repository.save(new Client(client.getSecurityNumber(), client.getFirstName(), client.getLastName()));
         return _client;
     }
+    */
 
     @DeleteMapping("/clients/{id}")
     public ResponseEntity<String> deleteClient(@PathVariable("id") long id) {
